@@ -1,15 +1,10 @@
-import { values } from '../constants'
+import { values } from '../constants';
 
 export const generateBoxes = () => {
-
- const randomisedValues = values
-  .sort((a, b) => 0.5 - Math.random())
-  .reduce((acc, value, index) => {
-   acc[index + 1] = value
-   return acc;
-  }, {});
-
- return randomisedValues;
+ return values.sort((a, b) => 0.5 - Math.random()).reduce((acc, value, index) => {
+  acc[index + 1] = value;
+  return acc;
+ }, {});
 }
 
 export const generateOtherBoxes = (selectedBox) => {

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { generateBoxes, generateOtherBoxes } from '../util/gameSetUp';
+import { offerDeal } from '../util/banker';
 import { values } from '../constants';
-import Box from '../components/Box'
+import Box from '../components/Box';
 
 const GameScreen = ({ navigation }) => {
  const selectedBox = navigation.getParam('itemId', {});
 
- const [activeBoxes, setActiveBoxes] = useState(generateOtherBoxes(selectedBox))
- const [gameValues, setGameValues] = useState(values.sort((a, b) => a.value - b.value))
+ const [activeBoxes, setActiveBoxes] = useState(generateOtherBoxes(selectedBox));
+ const [gameValues, setGameValues] = useState(values.sort((a, b) => a.value - b.value));
+ const [turnsUntilOffer, setTurnsUntilOffer] = useState(5);
 
  const boxValues = generateBoxes();
 
@@ -26,6 +28,11 @@ const GameScreen = ({ navigation }) => {
  }
 
  const pickBox = boxNumber => {
+  setTurnsUntilOffer(turnsUntilOffer - 1);
+  if (turnsUntilOffer === 0) {
+   console.log('BANKER OFFERS £', offerDeal(gameValues))
+  }
+
   removeBoxFromGame(boxNumber)
   removeValueFromBoard(boxNumber)
  }
@@ -33,7 +40,9 @@ const GameScreen = ({ navigation }) => {
 
  return (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }} >
-   <Text>This is the selectedBox => {selectedBox}</Text>
+   <View style={{ backgroundColor: 'pink', flex: 1 }}>
+    <Text>This is the selectedBox => {selectedBox}</Text>
+   </View>
    <FlatList
     data={activeBoxes}
     keyExtractor={(item) => `box-${item}`}
