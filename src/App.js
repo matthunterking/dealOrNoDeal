@@ -3,6 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from './screens/HomeScreen';
 import ChooseYourBoxScreen from './screens/ChooseYourBoxScreen';
+import GameScreen from './screens/GameScreen';
 
 const navigator = createStackNavigator({
   HomeScreen: {
@@ -13,6 +14,12 @@ const navigator = createStackNavigator({
   },
   ChooseYourBoxScreen: {
     screen: ChooseYourBoxScreen,
+    navigationOptions: {
+      headerShown: false,
+    }
+  },
+  GameScreen: {
+    screen: GameScreen,
     navigationOptions: {
       headerShown: false,
     }
