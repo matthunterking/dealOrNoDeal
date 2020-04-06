@@ -1,0 +1,17 @@
+{
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": true,
+    "window.zoomLevel": 0,
+    "editor.fontSize": 16,
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "editor.formatOnSave": true,
+    "workbench.iconTheme": "vscode-great-icons",
+    "diffEditor.ignoreTrimWhitespace": true,
+    "window.openFilesInNewWindow": "on",
+    "window.openFoldersInNewWindow": "on",
+    "files.insertFinalNewline": true,
+    "editor.tabSize": 1,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.editor.enablePreview": false
+    }
