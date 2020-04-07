@@ -1,4 +1,4 @@
-import { values } from '../constants';
+import { values } from '../constants/game';
 
 export const generateBoxes = () => {
  return values.sort((a, b) => 0.5 - Math.random()).reduce((acc, value, index) => {

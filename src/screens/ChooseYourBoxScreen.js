@@ -1,26 +1,33 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
 import Box from '../components/Box'
 
 const ChooseYourBoxScreen = ({ navigation }) => {
- const numbers = new Array(22).fill('').map((n, index) => index + 1);
+  const numbers = new Array(22).fill('').map((n, index) => index + 1);
 
- const selectBox = (number) => {
-  navigation.navigate('GameScreen', {
-   itemId: number
-  })
- }
+  const selectBox = number => {
+    navigation.navigate('GameScreen', { itemId: number });
+  };
 
- return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  <Text>Choose your box</Text>
-  <FlatList
-   data={numbers}
-   keyExtractor={(item) => `box-${item}`}
-   renderItem={({ item }) => <Box number={item} onPress={selectBox} />}
-   numColumns={4}
-  />
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text>Choose your box</Text>
+      <FlatList
+        data={numbers}
+        keyExtractor={item => `box-${item}`}
+        renderItem={({ item }) => <Box number={item} onPress={selectBox} />}
+        numColumns={4}
+      />
+    </SafeAreaView>
+  );
+};
 
- </View>
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
 
 export default ChooseYourBoxScreen;
