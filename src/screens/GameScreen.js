@@ -5,6 +5,7 @@ import { offerDeal } from '../util/banker';
 import { bankerTurns } from '../constants/game';
 import GameHeader from '../components/GameHeader';
 import DealModal from '../components/DealModal';
+import EndOfGameModal from '../components/EndOfGameModal';
 import BoxSelectionCarousel from '../components/BoxSelectionCarousel';
 import GameBoard from '../components/GameBoard';
 
@@ -16,7 +17,8 @@ const GameScreen = ({ navigation }) => {
   const [lastOffer, setLastOffer] = useState(null);
   const [currentOffer, setCurrentOffer] = useState(null);
   const [showDealModal, setShowDealModal] = useState(false);
-  const [dealtAt, setDealtAt] = useState(null)
+  const [dealtAt, setDealtAt] = useState(null);
+  const [showEndOfGameModel, setShowEndOfGameModel] = useState(false);
 
 
   const updateBoxValues = (selectedBoxNumber) => {
@@ -36,7 +38,6 @@ const GameScreen = ({ navigation }) => {
       setShowDealModal(true)
       setCurrentOffer(offer)
     }
-
   };
 
   const takeDeal = () => {
@@ -48,15 +49,23 @@ const GameScreen = ({ navigation }) => {
     closeModal()
   }
 
+  const checkForEndOfGame = () => {
+    if (turnCounter === 21) {
+      setShowEndOfGameModel(true)
+    }
+  }
+
   const closeModal = () => {
     setShowDealModal(false);
-    setLastOffer(currentOffer)
+    setLastOffer(currentOffer);
+    checkForEndOfGame()
   }
 
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }} >
       <DealModal isVisable={showDealModal} currentOffer={currentOffer} takeDeal={takeDeal} noDeal={noDeal} dealtAt={dealtAt} closeModal={closeModal} />
+      <EndOfGameModal isVisable={showEndOfGameModel} dealtAt={dealtAt} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} lastOffer={lastOffer} />
       <GameHeader chosenBox={chosenBoxNumber} turnCounter={turnCounter} lastOffer={lastOffer} dealtAt={dealtAt} />
       <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} />
       <GameBoard boxValues={boxValues} />
