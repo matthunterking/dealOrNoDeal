@@ -4,6 +4,7 @@ import { generateBoxes, generateOtherBoxes } from '../util/gameSetUp';
 import { offerDeal } from '../util/banker';
 import { values } from '../constants/game';
 import GameHeader from '../components/GameHeader';
+import BoxSelectionCarousel from '../components/BoxSelectionCarousel';
 import Box from '../components/Box';
 
 const GameScreen = ({ navigation }) => {
@@ -46,12 +47,7 @@ const GameScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }} >
       <GameHeader chosenBox={selectedBox} />
-      <FlatList
-        data={activeBoxes}
-        keyExtractor={item => `box-${item}`}
-        renderItem={({ item }) => <Box number={item} onPress={pickBox} />}
-        numColumns={4}
-      />
+      <BoxSelectionCarousel activeBoxes={activeBoxes} pickBox={pickBox} />
       <FlatList
         data={gameValues}
         keyExtractor={item => `value-${item}`}

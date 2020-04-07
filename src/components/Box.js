@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Box = ({ number, onPress }) => (
- <TouchableOpacity style={styles.container} onPress={() => onPress(number)}>
+const Box = ({ number, onPress = null }) => (
+ <TouchableOpacity style={styles.container} onPress={() => onPress && onPress(number)}>
   <Text style={styles.number}>{number}</Text>
  </TouchableOpacity>
 )
