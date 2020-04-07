@@ -1,10 +1,9 @@
 import { values } from '../constants/game';
 
 export const generateBoxes = () => {
- return values.sort((a, b) => 0.5 - Math.random()).reduce((acc, value, index) => {
-  acc[index + 1] = value;
-  return acc;
- }, {});
+ return values.sort((a, b) => 0.5 - Math.random()).map((value, index) => {
+  return { boxNumber: index + 1, value, isOpened: false }
+ });
 }
 
 export const generateOtherBoxes = (selectedBox) => {

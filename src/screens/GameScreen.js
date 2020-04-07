@@ -8,51 +8,39 @@ import BoxSelectionCarousel from '../components/BoxSelectionCarousel';
 import GameBoard from '../components/GameBoard';
 
 const GameScreen = ({ navigation }) => {
-  const selectedBox = navigation.getParam('itemId', {});
+  const chosenBoxNumber = navigation.getParam('itemId', {});
 
-  const [activeBoxes, setActiveBoxes] = useState(
-    generateOtherBoxes(selectedBox),
-  );
-  const [gameValues, setGameValues] = useState(
-    values.sort((a, b) => a.value - b.value),
-  );
-  const [turnsUntilOffer, setTurnsUntilOffer] = useState(5);
+  const [boxValues, setBoxValues] = useState(generateBoxes());
 
-  const boxValues = generateBoxes();
+  console.log(boxValues);
 
-  const removeBoxFromGame = boxNumber => {
-    const activeBoxesIndex = activeBoxes.indexOf(boxNumber);
-    activeBoxes.splice(activeBoxesIndex, 1);
-    setActiveBoxes([...activeBoxes]);
-  };
+  const updateBoxValues = (selectedBoxNumber) => {
+    const updatedBoxes = boxValues.map(box => {
+      if (box.boxNumber === selectedBoxNumber) box.isOpened = true;
+      return box
+    });
+    setBoxValues(updatedBoxes)
+  }
 
-  const removeValueFromBoard = boxNumber => {
-    const selectedValue = boxValues[boxNumber];
-    const selectedValueIndex = gameValues.indexOf(selectedValue);
-    gameValues.splice(selectedValueIndex, 1);
-    setGameValues([...gameValues]);
-  };
+  const openBox = boxNumber => {
 
-  const pickBox = boxNumber => {
-    setTurnsUntilOffer(turnsUntilOffer - 1);
-    if (turnsUntilOffer === 0) {
-      console.log('BANKER OFFERS £', offerDeal(gameValues));
-    }
+    console.log('OPENING BOX ', boxNumber);
+    // setTurnsUntilOffer(turnsUntilOffer - 1);
+    // if (turnsUntilOffer === 0) {
+    //   console.log('BANKER OFFERS £', offerDeal(gameValues));
+    // }
 
-    removeBoxFromGame(boxNumber);
-    removeValueFromBoard(boxNumber);
+    updateBoxValues(boxNumber)
   };
 
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }} >
-      <GameHeader chosenBox={selectedBox} />
-      <BoxSelectionCarousel activeBoxes={activeBoxes} pickBox={pickBox} />
-      <GameBoard gameValues={gameValues} />
+      <GameHeader chosenBox={chosenBoxNumber} />
+      <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} />
+      <GameBoard boxValues={boxValues} />
     </SafeAreaView>
   );
 };
 
 export default GameScreen;
-
-// values display = activeValues = [1, 2000, 3000 ]
