@@ -1,8 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Box from './Box';
+import { bankerTurns } from '../constants/game';
+import { formatToCurrency } from '../util/currency'
 
-const GameHeader = ({ chosenBox, selectionsTillNextDeal, lastOffer, dealtAt }) => {
+const GameHeader = ({ chosenBox, turnCounter, lastOffer, dealtAt }) => {
+ const nextBankerTurn = bankerTurns.find(bankerTurn => bankerTurn > turnCounter - 1);
+
  return (
   <View style={styles.container}>
    <View style={styles.yourBoxContainer}>
@@ -10,9 +14,9 @@ const GameHeader = ({ chosenBox, selectionsTillNextDeal, lastOffer, dealtAt }) =
     <Box number={chosenBox} />
    </View>
    <View style={styles.gameStatusContainer}>
-    <Text>Boxes until deal {selectionsTillNextDeal}</Text>
-    {lastOffer && <Text>Last offer {lastOffer}</Text>}
-    {dealtAt && <Text>Dealt at {dealtAt}</Text>}
+    <Text>Boxes until deal {'🔴'.repeat(nextBankerTurn - (turnCounter - 1))}</Text>
+    {lastOffer && <Text>Last offer {formatToCurrency(lastOffer)}</Text>}
+    {dealtAt && <Text>Dealt at {formatToCurrency(dealtAt)}</Text>}
    </View>
   </View>
  )

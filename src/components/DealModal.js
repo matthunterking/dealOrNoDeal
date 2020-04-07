@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { formatToCurrency } from '../util/currency'
 
-const DealModal = ({ isVisable, lastOffer, takeDeal, noDeal }) => {
+const DealModal = ({ isVisable, currentOffer, takeDeal, noDeal, dealtAt, closeModal }) => {
  return <Modal
   animationType="slide"
   transparent={true}
@@ -11,13 +11,24 @@ const DealModal = ({ isVisable, lastOffer, takeDeal, noDeal }) => {
   <View style={styles.outerContainer}>
    <View style={styles.container}>
     <Text>The banker offers you</Text>
-    <Text>{formatToCurrency(lastOffer)}</Text>
-    <TouchableOpacity style={styles.button} onPress={takeDeal}>
-     <Text>Deal</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.button} onPress={noDeal}>
-     <Text>No Deal</Text>
-    </TouchableOpacity>
+    <Text>{formatToCurrency(currentOffer)}</Text>
+    {dealtAt ?
+     <Fragment>
+      <Text>You dealt at {formatToCurrency(dealtAt)}</Text>
+      <TouchableOpacity style={styles.button} onPress={closeModal}>
+       <Text>Close</Text>
+      </TouchableOpacity>
+     </Fragment>
+     :
+     <Fragment>
+      <TouchableOpacity style={styles.button} onPress={takeDeal}>
+       <Text>Deal</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={noDeal}>
+       <Text>No Deal</Text>
+      </TouchableOpacity>
+     </Fragment>
+    }
    </View>
   </View>
  </Modal>

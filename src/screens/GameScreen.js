@@ -14,7 +14,9 @@ const GameScreen = ({ navigation }) => {
   const [boxValues, setBoxValues] = useState(generateBoxes());
   const [turnCounter, setTurnCounter] = useState(1);
   const [lastOffer, setLastOffer] = useState(null);
+  const [currentOffer, setCurrentOffer] = useState(null);
   const [showDealModal, setShowDealModal] = useState(false);
+  const [dealtAt, setDealtAt] = useState(null)
 
 
   const updateBoxValues = (selectedBoxNumber) => {
@@ -32,13 +34,14 @@ const GameScreen = ({ navigation }) => {
     if (bankerTurns.includes(turnCounter)) {
       const offer = offerDeal(remainingValues)
       setShowDealModal(true)
-      setLastOffer(offer)
+      setCurrentOffer(offer)
     }
 
   };
 
   const takeDeal = () => {
     closeModal()
+    setDealtAt(currentOffer)
   }
 
   const noDeal = () => {
@@ -47,13 +50,14 @@ const GameScreen = ({ navigation }) => {
 
   const closeModal = () => {
     setShowDealModal(false);
+    setLastOffer(currentOffer)
   }
 
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }} >
-      <DealModal isVisable={showDealModal} lastOffer={lastOffer} takeDeal={takeDeal} noDeal={noDeal} />
-      <GameHeader chosenBox={chosenBoxNumber} />
+      <DealModal isVisable={showDealModal} currentOffer={currentOffer} takeDeal={takeDeal} noDeal={noDeal} dealtAt={dealtAt} closeModal={closeModal} />
+      <GameHeader chosenBox={chosenBoxNumber} turnCounter={turnCounter} lastOffer={lastOffer} dealtAt={dealtAt} />
       <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} />
       <GameBoard boxValues={boxValues} />
     </SafeAreaView>
