@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { generateBoxes, generateOtherBoxes } from '../util/gameSetUp';
 import { offerDeal } from '../util/banker';
 import { values } from '../constants/game';
 import GameHeader from '../components/GameHeader';
 import BoxSelectionCarousel from '../components/BoxSelectionCarousel';
-import Box from '../components/Box';
+import GameBoard from '../components/GameBoard';
 
 const GameScreen = ({ navigation }) => {
   const selectedBox = navigation.getParam('itemId', {});
@@ -48,12 +48,7 @@ const GameScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }} >
       <GameHeader chosenBox={selectedBox} />
       <BoxSelectionCarousel activeBoxes={activeBoxes} pickBox={pickBox} />
-      <FlatList
-        data={gameValues}
-        keyExtractor={item => `value-${item}`}
-        renderItem={({ item }) => <View style={{ padding: 10 }}><Text>{item}</Text></View>}
-        numColumns={1}
-      />
+      <GameBoard gameValues={gameValues} />
     </SafeAreaView>
   );
 };
