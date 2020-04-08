@@ -36,7 +36,7 @@ const GameScreen = ({ navigation }) => {
     setTurnCounter(turnCounter + 1)
     const remainingValues = boxValues.filter(({ isOpened }) => !isOpened).map(({ value }) => value)
     if (bankerTurns.includes(turnCounter)) {
-      const offer = offerDeal(remainingValues)
+      const offer = offerDeal(remainingValues, turnCounter)
       setShowDealModal(true)
       setCurrentOffer(offer)
     }
