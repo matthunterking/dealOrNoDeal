@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { formatToCurrency } from '../util/currency'
 
-const Box = ({ number, onPress = null, isOpened = false, value }) => (
+const Box = ({ number, isOpened = false, value }) => (
  <Fragment>
   {isOpened && <View style={styles.boxLid}>
    <Text>{formatToCurrency(value)}</Text>
   </View>}
-  <TouchableOpacity style={styles.container} onPress={() => onPress && onPress(number)}>
+  <View style={styles.container}>
    <Text style={styles.number}>{number}</Text>
-  </TouchableOpacity>
+  </View>
  </Fragment>
 )
 

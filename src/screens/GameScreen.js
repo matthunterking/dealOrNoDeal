@@ -30,6 +30,8 @@ const GameScreen = ({ navigation }) => {
   }
 
   const openBox = boxNumber => {
+    const selectedBox = boxValues.find(box => box.boxNumber === boxNumber)
+    if (selectedBox.isOpened) return null
     updateBoxValues(boxNumber);
     setTurnCounter(turnCounter + 1)
     const remainingValues = boxValues.filter(({ isOpened }) => !isOpened).map(({ value }) => value)

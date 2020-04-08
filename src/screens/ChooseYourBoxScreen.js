@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
-import Box from '../components/Box'
+import { Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import Box from '../components/Box';
+import { deviceWidth } from '../constants/device'
 
 const ChooseYourBoxScreen = ({ navigation }) => {
   const numbers = new Array(22).fill('').map((n, index) => index + 1);
@@ -15,7 +16,11 @@ const ChooseYourBoxScreen = ({ navigation }) => {
       <FlatList
         data={numbers}
         keyExtractor={item => `box-${item}`}
-        renderItem={({ item }) => <Box number={item} onPress={selectBox} />}
+        renderItem={({ item }) => {
+          return <TouchableOpacity style={styles.boxContainer} onPress={() => selectBox(item)}>
+            <Box number={item} />
+          </TouchableOpacity>
+        }}
         numColumns={4}
       />
     </SafeAreaView>
@@ -27,6 +32,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  boxContainer: {
+    backgroundColor: 'red',
+    margin: 5
   }
 });
 
