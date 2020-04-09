@@ -12,7 +12,7 @@ const ChooseYourBoxScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Choose your box</Text>
+      <Text style={styles.title}>Choose your box</Text>
       <FlatList
         data={numbers}
         keyExtractor={item => `box-${item}`}
@@ -35,6 +35,11 @@ const styles = StyleSheet.create({
   },
   boxContainer: {
     margin: 5
+  },
+  title: {
+    fontSize: 25,
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
   }
 });
 
