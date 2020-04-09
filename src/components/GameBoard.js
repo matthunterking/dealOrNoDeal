@@ -2,19 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { deviceWidth } from '../constants/device';
 import { values } from '../constants/game';
-import { formatToCurrency } from '../util/currency'
+import Amount from './Amount';
 
-const Amount = ({ value, isOpened }) => (
- <Text
-  style={[
-   styles.amount,
-   value > 999 ? styles.highValue : styles.lowValue,
-   isOpened ? { backgroundColor: 'white', color: 'white' } : {}
-  ]}
- >
-  {formatToCurrency(value)}
- </Text>
-)
 
 const GameBoard = ({ boxValues }) => {
  const allValues = values.sort((a, b) => a - b).map(value => {
@@ -28,13 +17,13 @@ const GameBoard = ({ boxValues }) => {
     style={styles.list}
     data={allValues.slice(0, 11)}
     keyExtractor={item => `value-${item.value}`}
-    renderItem={({ item }) => <Amount {...item} />}
+    renderItem={({ item }) => <Amount {...item} isLarge />}
    />
    <FlatList
     style={styles.list}
     data={allValues.slice(11, 22)}
     keyExtractor={item => `value-${item.value}`}
-    renderItem={({ item }) => <Amount {...item} />}
+    renderItem={({ item }) => <Amount {...item} isLarge />}
    />
   </View>
  )
@@ -46,7 +35,8 @@ const styles = StyleSheet.create({
   width: deviceWidth,
   flexDirection: 'row',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  backgroundColor: 'silver'
  },
  list: {
   flex: 1
@@ -58,19 +48,7 @@ const styles = StyleSheet.create({
  },
  gameStatusContainer: {
   flex: 2,
-  justifyContent: 'space-around'
- },
- amount: {
-  flex: 1,
-  textAlign: 'center',
-  fontSize: 25,
-  borderWidth: 1,
- },
- lowValue: {
-  backgroundColor: 'blue'
- },
- highValue: {
-  backgroundColor: 'red'
+  justifyContent: 'space-around',
  }
 })
 

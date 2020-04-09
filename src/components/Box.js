@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { formatToCurrency } from '../util/currency';
 import { BOX_RED, SEAL_RED } from '../constants/theme';
+import Amount from './Amount';
 
 const Seal = () => (
  <View style={styles.seal} />
@@ -14,7 +15,7 @@ const ClosedLid = () => (
 const OpenLid = ({ value }) => (
  <View style={styles.boxLid}>
   <View style={styles.innerBoxLid}>
-   <Text>{formatToCurrency(value)}</Text>
+   <Amount value={value} />
   </View>
  </View>
 )
