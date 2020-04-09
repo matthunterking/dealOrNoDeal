@@ -2,7 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Box from './Box';
 import { bankerTurns } from '../constants/game';
-import { formatToCurrency } from '../util/currency'
+import { formatToCurrency } from '../util/currency';
+import { DEAL_NO_DEAL_BUTTON } from '../constants/theme';
+
+const GameStatus = ({ text, valueToDisplay }) => (
+ <View>
+  <Text style={styles.text}>{text}</Text>
+  <Text style={styles.value}>{valueToDisplay}</Text>
+ </View>
+)
 
 const GameHeader = ({ chosenBox, turnCounter, lastOffer, dealtAt }) => {
  const nextBankerTurn = bankerTurns.find(bankerTurn => bankerTurn > turnCounter - 1);
@@ -10,15 +18,15 @@ const GameHeader = ({ chosenBox, turnCounter, lastOffer, dealtAt }) => {
  return (
   <View style={styles.container}>
    <View style={styles.yourBoxContainer}>
-    <Text>Your Box</Text>
+    <Text style={styles.text}>Your Box</Text>
     <Box number={chosenBox} />
    </View>
    <View style={styles.gameStatusContainer}>
-    <Text>Boxes until deal {'🔴'.repeat(nextBankerTurn - (turnCounter - 1))}</Text>
-    {lastOffer && <Text>Last offer {formatToCurrency(lastOffer)}</Text>}
-    {dealtAt && <Text>Dealt at {formatToCurrency(dealtAt)}</Text>}
+    <GameStatus text='Boxes until deal' valueToDisplay={'🔴'.repeat(nextBankerTurn - (turnCounter - 1))} />
+    {lastOffer && <GameStatus text='Last offer' valueToDisplay={formatToCurrency(lastOffer)} />}
+    {dealtAt && <GameStatus text='Dealt at' valueToDisplay={formatToCurrency(dealtAt)} />}
    </View>
-  </View>
+  </View >
  )
 }
 
@@ -29,11 +37,25 @@ const styles = StyleSheet.create({
  yourBoxContainer: {
   flex: 1,
   justifyContent: 'center',
-  padding: 15
+  padding: 10,
+  alignItems: 'center',
  },
  gameStatusContainer: {
   flex: 2,
   justifyContent: 'space-around'
+ },
+ text: {
+  textAlign: 'center',
+  marginBottom: 5,
+  fontSize: 18,
+  textTransform: 'uppercase',
+  fontWeight: 'bold'
+ },
+ value: {
+  textAlign: 'center',
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: 'blue'
  }
 })
 

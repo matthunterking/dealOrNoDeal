@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { formatToCurrency } from '../util/currency';
-import { DEAL_NO_DEAL_BUTTON } from '../constants/theme';
+import Button from './Button';
 
 const phoneImage = require('../assets/phone.png');
 
@@ -18,19 +18,13 @@ const DealModal = ({ isVisable, currentOffer, takeDeal, noDeal, dealtAt, closeMo
     <Text style={styles.offer}>{formatToCurrency(currentOffer)}</Text>
     {dealtAt ?
      <Fragment>
-      <Text>You dealt at {formatToCurrency(dealtAt)}</Text>
-      <TouchableOpacity style={styles.button} onPress={closeModal}>
-       <Text>Close</Text>
-      </TouchableOpacity>
+      <Text style={styles.offerText}>You dealt at {formatToCurrency(dealtAt)}</Text>
+      <Button onPress={closeModal} content='close' />
      </Fragment>
      :
      <Fragment>
-      <TouchableOpacity style={styles.button} onPress={takeDeal}>
-       <Text style={styles.dealNoDealText}>Deal</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={noDeal}>
-       <Text style={styles.dealNoDealText}>No Deal</Text>
-      </TouchableOpacity>
+      <Button onPress={takeDeal} content='Deal' />
+      <Button onPress={noDeal} content='No Deal' />
      </Fragment>
     }
    </View>
@@ -52,18 +46,6 @@ const styles = StyleSheet.create({
   width: 350,
   justifyContent: 'center',
   alignItems: 'center'
- },
- button: {
-  backgroundColor: DEAL_NO_DEAL_BUTTON,
-  borderRadius: 40,
-  padding: 15,
-  width: 250,
-  margin: 10
- },
- dealNoDealText: {
-  fontSize: 25,
-  textAlign: 'center',
-  textTransform: 'uppercase'
  },
  offerText: {
   fontSize: 25

@@ -33,8 +33,7 @@ const BoxSelectionCarousel = ({ openBox, boxValues, chosenBoxNumber }) => {
 const styles = StyleSheet.create({
  container: {
   flexDirection: 'row',
-  height: 200,
-  backgroundColor: 'green'
+  height: 200
  },
  yourBoxContainer: {
   flex: 1,
