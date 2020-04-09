@@ -1,38 +1,86 @@
 import React, { Fragment } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { formatToCurrency } from '../util/currency'
+import { formatToCurrency } from '../util/currency';
+import { BOX_RED, SEAL_RED } from '../constants/theme';
+
+const Seal = () => (
+ <View style={styles.seal} />
+)
+
+const ClosedLid = () => (
+ <View style={styles.closedLid} />
+)
+
+const OpenLid = ({ value }) => (
+ <View style={styles.boxLid}>
+  <View style={styles.innerBoxLid}>
+   <Text>{formatToCurrency(value)}</Text>
+  </View>
+ </View>
+)
 
 const Box = ({ number, isOpened = false, value }) => (
  <Fragment>
-  {isOpened && <View style={styles.boxLid}>
-   <Text>{formatToCurrency(value)}</Text>
-  </View>}
+  {isOpened && <OpenLid value={value} />}
+  {!isOpened && <ClosedLid />}
   <View style={styles.container}>
-   <Text style={styles.number}>{number}</Text>
+   {!isOpened && <Seal />}
+   <View style={styles.numberContainer}>
+    <Text style={styles.number}>{number}</Text>
+   </View>
   </View>
  </Fragment>
 )
 
 const styles = StyleSheet.create({
  container: {
-  backgroundColor: 'red',
+  backgroundColor: BOX_RED,
   padding: 15,
   justifyContent: 'center',
   alignItems: 'center',
-  margin: 5,
-  height: 70,
-  width: 70
+  height: 60,
+  width: 100,
+  borderWidth: 0.5
  },
  number: {
-  backgroundColor: 'white',
-  padding: 5,
-  fontSize: 20,
+  borderWidth: 1,
+  fontSize: 26,
   height: 30,
-  width: 30,
-  textAlign: 'center'
+  width: 45,
+  textAlign: 'center',
+  fontWeight: 'bold'
  },
  boxLid: {
-  backgroundColor: 'white'
+  backgroundColor: BOX_RED,
+  width: 100,
+  height: 55,
+  padding: 5
+ },
+ innerBoxLid: {
+  backgroundColor: 'white',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: "center"
+ },
+ closedLid: {
+  height: 15,
+  width: 100,
+  backgroundColor: BOX_RED,
+  borderWidth: 0.5
+ },
+ numberContainer: {
+  backgroundColor: 'white',
+  padding: 5,
+  width: 55
+ },
+ seal: {
+  position: 'absolute',
+  height: 20,
+  width: 10,
+  backgroundColor: SEAL_RED,
+  top: -10,
+  left: 5,
+  borderBottomWidth: 0.5
  }
 });
 

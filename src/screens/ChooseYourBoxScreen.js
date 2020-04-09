@@ -21,7 +21,7 @@ const ChooseYourBoxScreen = ({ navigation }) => {
             <Box number={item} />
           </TouchableOpacity>
         }}
-        numColumns={4}
+        numColumns={3}
       />
     </SafeAreaView>
   );
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   boxContainer: {
-    backgroundColor: 'red',
     margin: 5
   }
 });
