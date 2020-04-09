@@ -23,8 +23,10 @@ const GameHeader = ({ chosenBox, turnCounter, lastOffer, dealtAt }) => {
    </View>
    <View style={styles.gameStatusContainer}>
     <GameStatus text='Boxes until deal' valueToDisplay={'🔴'.repeat(nextBankerTurn - (turnCounter - 1))} />
-    {lastOffer && <GameStatus text='Last offer' valueToDisplay={formatToCurrency(lastOffer)} />}
-    {dealtAt && <GameStatus text='Dealt at' valueToDisplay={formatToCurrency(dealtAt)} />}
+    <View style={styles.dealStatusContainer}>
+     {lastOffer && <GameStatus text='Last offer' valueToDisplay={formatToCurrency(lastOffer)} />}
+     {dealtAt && <GameStatus text='Dealt at' valueToDisplay={formatToCurrency(dealtAt)} />}
+    </View>
    </View>
   </View >
  )
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
  yourBoxContainer: {
   flex: 1,
   justifyContent: 'center',
-  padding: 10,
+  padding: 5,
   alignItems: 'center',
  },
  gameStatusContainer: {
@@ -47,15 +49,19 @@ const styles = StyleSheet.create({
  text: {
   textAlign: 'center',
   marginBottom: 5,
-  fontSize: 18,
+  fontSize: 16,
   textTransform: 'uppercase',
   fontWeight: 'bold'
  },
  value: {
   textAlign: 'center',
-  fontSize: 18,
+  fontSize: 16,
   fontWeight: 'bold',
   color: 'blue'
+ },
+ dealStatusContainer: {
+  flexDirection: 'row',
+  justifyContent: 'space-around'
  }
 })
 

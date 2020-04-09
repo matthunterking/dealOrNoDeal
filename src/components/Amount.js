@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   textAlign: 'center'
  },
  largeText: {
-  fontSize: 25
+  fontSize: 16
  },
  amount: {
   flex: 1,

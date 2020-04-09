@@ -109,12 +109,6 @@ const EndOfGameModal = ({ isVisable, dealtAt, boxValues, chosenBoxNumber, naviga
     )
   }
 
-  const offerSwap = Math.random() > 0.5;
-
-  // No deal no swap
-  // No deal swap
-
-
   return <Modal
     animationType="slide"
     transparent={true}
