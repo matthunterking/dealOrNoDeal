@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Modal, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { generateBoxes } from '../util/gameSetUp';
 import { offerDeal } from '../util/banker';
 import { bankerTurns } from '../constants/game';
@@ -19,7 +19,6 @@ const GameScreen = ({ navigation }) => {
   const [showDealModal, setShowDealModal] = useState(false);
   const [dealtAt, setDealtAt] = useState(null);
   const [showEndOfGameModel, setShowEndOfGameModel] = useState(false);
-
 
   const updateBoxValues = (selectedBoxNumber) => {
     const updatedBoxes = boxValues.map(box => {
