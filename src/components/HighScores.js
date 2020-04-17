@@ -8,7 +8,7 @@ import { getHighScores } from '../util/storage';
 
 const Score = ({ date, score }) => (
  <View style={styles.scoreContainer}>
-  <Text style={styles.text}>{moment(date).fromNow()}</Text>
+  <Text style={styles.text}>{moment(date).format('DD MMM YYYY')}</Text>
   <Text style={styles.text}>{formatToCurrency(score)}</Text>
  </View>
 )

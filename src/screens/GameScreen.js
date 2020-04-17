@@ -4,7 +4,7 @@ import { generateBoxes } from '../util/gameSetUp';
 import { offerDeal } from '../util/banker';
 import { bankerTurns } from '../constants/game';
 import GameHeader from '../components/GameHeader';
-import DealModal from '../components/DealModal';
+import DealActions from '../components/DealActions';
 import EndOfGameModal from '../components/EndOfGameModal';
 import BoxSelectionCarousel from '../components/BoxSelectionCarousel';
 import GameBoard from '../components/GameBoard';
@@ -16,7 +16,7 @@ const GameScreen = ({ navigation }) => {
   const [turnCounter, setTurnCounter] = useState(1);
   const [lastOffer, setLastOffer] = useState(null);
   const [currentOffer, setCurrentOffer] = useState(null);
-  const [showDealModal, setShowDealModal] = useState(false);
+  const [showDealActions, setShowDealActions] = useState(false);
   const [dealtAt, setDealtAt] = useState(null);
   const [showEndOfGameModel, setShowEndOfGameModel] = useState(false);
 
@@ -36,7 +36,7 @@ const GameScreen = ({ navigation }) => {
     const remainingValues = boxValues.filter(({ isOpened }) => !isOpened).map(({ value }) => value)
     if (bankerTurns.includes(turnCounter)) {
       const offer = offerDeal(remainingValues, turnCounter)
-      setShowDealModal(true)
+      setShowDealActions(true)
       setCurrentOffer(offer)
     }
   };
@@ -57,7 +57,7 @@ const GameScreen = ({ navigation }) => {
   }
 
   const closeModal = () => {
-    setShowDealModal(false);
+    setShowDealActions(false);
     setLastOffer(currentOffer);
     checkForEndOfGame()
   }
@@ -65,10 +65,13 @@ const GameScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-      <DealModal isVisable={showDealModal} currentOffer={currentOffer} takeDeal={takeDeal} noDeal={noDeal} dealtAt={dealtAt} closeModal={closeModal} />
       <EndOfGameModal isVisable={showEndOfGameModel} dealtAt={dealtAt} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} lastOffer={lastOffer} navigation={navigation} />
       <GameHeader chosenBox={chosenBoxNumber} turnCounter={turnCounter} lastOffer={lastOffer} dealtAt={dealtAt} />
-      <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} />
+      {showDealActions ?
+        <DealActions isVisable={showDealActions} currentOffer={currentOffer} takeDeal={takeDeal} noDeal={noDeal} dealtAt={dealtAt} closeModal={closeModal} />
+        :
+        <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} />
+      }
       <GameBoard boxValues={boxValues} />
     </SafeAreaView>
   );
