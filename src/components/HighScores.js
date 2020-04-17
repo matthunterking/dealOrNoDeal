@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';;
 import moment from 'moment';
 import { deviceWidth } from '../constants/device';
 import { formatToCurrency } from '../util/currency';
@@ -13,12 +13,20 @@ const Score = ({ date, score }) => (
  </View>
 )
 
-const HighScores = () => {
+const HighScores = ({ navigation }) => {
  const [highScores, setHighScores] = useState(null);
 
+ const getScores = async () => {
+  const scores = await getHighScores();
+  setHighScores(scores);
+ }
+
  useEffect(() => {
-  getHighScores(setHighScores);
- }, [highScores])
+  getScores();
+  return navigation.addListener('didFocus', () => {
+   getScores();
+  });
+ }, []);
 
  if (!highScores) return null;
 
@@ -49,7 +57,7 @@ const styles = StyleSheet.create({
  scoreContainer: {
   flexDirection: 'row',
   justifyContent: 'space-between',
-  paddingHorizontal: 50,
+  paddingHorizontal: 30,
   marginVertical: 3
  },
  title: {

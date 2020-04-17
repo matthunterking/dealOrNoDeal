@@ -30,11 +30,16 @@ const replaceHighScore = (highScores, newScoreData, scoreToReplace) => {
 }
 
 export const getHighScores = async (callback = null) => {
+ console.log('getting scores');
+
  try {
   const data = await AsyncStorage.getItem('highScores');
-  const parsedData = JSON.parse(data)
+  const parsedData = JSON.parse(data);
+  console.log('got this back! ', parsedData);
+
   return callback ? callback(parsedData) : parsedData;
  } catch (e) {
+  console.log('error ', e);
   return callback ? callback(null) : null;
  }
 }
@@ -42,9 +47,10 @@ export const getHighScores = async (callback = null) => {
 export const updateHighScores = async (newScore) => {
  const newScoreData = { date: moment.now(), score: newScore };
  const highScores = await getHighScores();
+ if (!highScores) return updateHighScoreList([newScoreData]);
+
  const lowestScore = highScores[highScores.length - 1];
 
- if (!highScores) return await updateHighScoreList([newScoreData]);
  if (highScores.length < 5) return addHighScore(highScores, newScoreData);
  if (newScore > lowestScore.score) return replaceHighScore(highScores, newScoreData, lowestScore);
 }
