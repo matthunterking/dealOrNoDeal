@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { AMOUNT_RED } from '../constants/theme';
 import Button from '../components/Button';
 import HighScores from '../components/HighScores';

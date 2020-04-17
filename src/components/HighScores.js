@@ -1,32 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import moment from 'moment';
 import { deviceWidth } from '../constants/device';
 import { formatToCurrency } from '../util/currency';
-import { DEAL_NO_DEAL_BUTTON } from '../constants/theme'
-
-const tempHighScores = [
- { date: '11/02/2020', score: 3000 },
- { date: '11/02/2020', score: 1000 },
- { date: '11/02/2020', score: 250 },
- { date: '11/02/2020', score: 100 },
- { date: '11/02/2020', score: 0.5 }
-]
+import { DEAL_NO_DEAL_BUTTON } from '../constants/theme';
+import { getHighScores } from '../util/storage';
 
 const Score = ({ date, score }) => (
  <View style={styles.scoreContainer}>
-  <Text style={styles.text}>{date}</Text>
+  <Text style={styles.text}>{moment(date).fromNow()}</Text>
   <Text style={styles.text}>{formatToCurrency(score)}</Text>
  </View>
 )
 
 const HighScores = () => {
- if (!tempHighScores) return null;
+ const [highScores, setHighScores] = useState(null);
+
+ useEffect(() => {
+  getHighScores(setHighScores);
+ }, [highScores])
+
+ if (!highScores) return null;
+
  return (
   <View style={styles.container}>
    <View style={styles.innerContainer}>
     <Text style={styles.title}>HIGH SCORES</Text>
     <FlatList
-     data={tempHighScores}
+     data={highScores}
      keyExtractor={(item, index) => `score-${index}`}
      renderItem={({ item }) => <Score {...item} />}
     />

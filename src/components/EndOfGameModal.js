@@ -1,16 +1,21 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { formatToCurrency } from '../util/currency';
 import Box from './Box';
 import Button from './Button';
+import { updateHighScores } from '../util/storage';
 
 const EndOfGameModal = ({ isVisable, dealtAt, boxValues, chosenBoxNumber, navigation, lastOffer }) => {
   const lastBox = boxValues.filter(({ isOpened, boxNumber }) => !isOpened && chosenBoxNumber !== boxNumber)[0];
   const yourBox = boxValues.find(({ boxNumber }) => boxNumber === chosenBoxNumber);
   const [openYourBox, setOpenYourBox] = useState(false)
   const [openOtherBox, setOpenOtherBox] = useState(false)
-  const [finalScore, setFinalScore] = useState(0);
+  const [finalScore, setFinalScore] = useState(null);
   const [hasSwapped, setHasSwapped] = useState(false);
+
+  useEffect(() => {
+    if (finalScore) updateHighScores(finalScore);
+  }, [finalScore])
 
   const chooseYourBox = () => {
     setOpenYourBox(true);
