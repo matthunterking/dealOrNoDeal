@@ -1,26 +1,54 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 import { formatToCurrency } from '../util/currency';
 import { AMOUNT_RED, AMOUNT_BLUE } from '../constants/theme';
 
 const Amount = ({ value, isOpened = false, isLarge = false }) => {
+ const animatedValue = new Animated.Value(0);
+
+ const hasBeenOpened = useRef(false)
+ console.log(value, isOpened, hasBeenOpened);
+
+
  const isHighValue = value > 999;
  const backgroundColor = isHighValue ? AMOUNT_RED : AMOUNT_BLUE;
+
+ const removeAnimated = () => {
+  const newPostion = isHighValue ? 500 : -500;
+  Animated.timing(animatedValue, { toValue: newPostion, duration: 2000, useNativeDriver: true }).start()
+ }
+
+ useEffect(() => {
+  console.log('in use effect', value);
+  console.log('isOpened', isOpened);
+  console.log('hasBeenOpened', hasBeenOpened);
+
+  if (isOpened) {
+   if (!hasBeenOpened.current) {
+    console.log('OPENING ', value)
+    removeAnimated()
+   }
+   hasBeenOpened.current = true
+  }
+
+  // if (isOpened) removeAnimated()
+ }, [isOpened]);
+
  return (
-  <View style={[
+  <Animated.View style={[
    styles.container,
    { backgroundColor },
-   isOpened ? { transform: [{ translateX: isHighValue ? 500 : -500 }] } : {}
+   isOpened ? { transform: [{ translateX: animatedValue }] } : {},
+   hasBeenOpened.current ? { opacity: 0 } : {}
   ]}
   >
    <Text style={[styles.text, isLarge ? styles.largeText : {}]}>{formatToCurrency(value)}</Text>
-  </View >
+  </Animated.View >
  )
 }
 
 const styles = StyleSheet.create({
  container: {
-  backgroundColor: 'pink',
   padding: 5,
   borderRadius: 10,
   borderWidth: 0.5,

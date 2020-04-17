@@ -6,24 +6,25 @@ import Amount from './Amount';
 
 
 const GameBoard = ({ boxValues }) => {
- const allValues = values.sort((a, b) => a - b).map(value => {
-  const { isOpened } = boxValues.find(box => box.value === value);
-  return { value, isOpened }
- });
+ const allValues = values.sort((a, b) => a - b);
+ const openValues = boxValues.filter(box => box.isOpened).map(({ value }) => value);
+
+ console.log('allValues===>', allValues, 'openValues===>', openValues);
+
 
  return (
   <View style={styles.container}>
    <FlatList
     style={styles.list}
     data={allValues.slice(0, 11)}
-    keyExtractor={item => `value-${item.value}`}
-    renderItem={({ item }) => <Amount {...item} isLarge />}
+    keyExtractor={item => `value-${item}`}
+    renderItem={({ item }) => <Amount value={item} isOpened={openValues.includes(item)} isLarge />}
    />
    <FlatList
     style={styles.list}
     data={allValues.slice(11, 22)}
-    keyExtractor={item => `value-${item.value}`}
-    renderItem={({ item }) => <Amount {...item} isLarge />}
+    keyExtractor={item => `value-${item}`}
+    renderItem={({ item }) => <Amount value={item} isOpened={openValues.includes(item)} isLarge />}
    />
   </View>
  )
