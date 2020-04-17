@@ -9,9 +9,6 @@ const GameBoard = ({ boxValues }) => {
  const allValues = values.sort((a, b) => a - b);
  const openValues = boxValues.filter(box => box.isOpened).map(({ value }) => value);
 
- console.log('allValues===>', allValues, 'openValues===>', openValues);
-
-
  return (
   <View style={styles.container}>
    <FlatList

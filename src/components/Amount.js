@@ -5,11 +5,7 @@ import { AMOUNT_RED, AMOUNT_BLUE } from '../constants/theme';
 
 const Amount = ({ value, isOpened = false, isLarge = false }) => {
  const animatedValue = new Animated.Value(0);
-
  const hasBeenOpened = useRef(false)
- console.log(value, isOpened, hasBeenOpened);
-
-
  const isHighValue = value > 999;
  const backgroundColor = isHighValue ? AMOUNT_RED : AMOUNT_BLUE;
 
@@ -19,19 +15,10 @@ const Amount = ({ value, isOpened = false, isLarge = false }) => {
  }
 
  useEffect(() => {
-  console.log('in use effect', value);
-  console.log('isOpened', isOpened);
-  console.log('hasBeenOpened', hasBeenOpened);
-
-  if (isOpened) {
-   if (!hasBeenOpened.current) {
-    console.log('OPENING ', value)
-    removeAnimated()
-   }
+  if (isOpened && !hasBeenOpened.current) {
+   removeAnimated()
    hasBeenOpened.current = true
   }
-
-  // if (isOpened) removeAnimated()
  }, [isOpened]);
 
  return (
