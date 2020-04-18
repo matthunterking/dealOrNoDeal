@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import { generateBoxes } from '../util/gameSetUp';
 import { offerDeal } from '../util/banker';
@@ -12,13 +12,17 @@ import GameBoard from '../components/GameBoard';
 const GameScreen = ({ navigation }) => {
   const chosenBoxNumber = navigation.getParam('itemId', {});
 
-  const [boxValues, setBoxValues] = useState(generateBoxes());
+  const [boxValues, setBoxValues] = useState(null);
   const [turnCounter, setTurnCounter] = useState(1);
   const [lastOffer, setLastOffer] = useState(null);
   const [currentOffer, setCurrentOffer] = useState(null);
   const [showDealActions, setShowDealActions] = useState(false);
   const [dealtAt, setDealtAt] = useState(null);
   const [showEndOfGameModel, setShowEndOfGameModel] = useState(false);
+
+  useEffect(() => {
+    setBoxValues(generateBoxes())
+  }, [])
 
   const updateBoxValues = (selectedBoxNumber) => {
     const updatedBoxes = boxValues.map(box => {
@@ -62,6 +66,7 @@ const GameScreen = ({ navigation }) => {
     checkForEndOfGame()
   }
 
+  if (!boxValues) return null
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >

@@ -12,6 +12,7 @@ export const generatePlayers = () => {
 
 export const generateBoxes = () => {
  const players = generatePlayers();
+ console.log('generating boxes! ')
  return values.sort((a, b) => 0.5 - Math.random()).map((value, index) => {
   return { boxNumber: index + 1, value, isOpened: false, player: players[index] }
  });

@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
-import { formatToCurrency } from '../util/currency';
+import React, { Fragment, useRef, useEffect } from 'react';
+import { Text, StyleSheet, View, Animated } from 'react-native';
 import { BOX_RED, SEAL_RED } from '../constants/theme';
 import Amount from './Amount';
 
@@ -12,17 +11,37 @@ const ClosedLid = () => (
  <View style={styles.closedLid} />
 )
 
-const OpenLid = ({ value }) => (
- <View style={styles.boxLid}>
-  <View style={styles.innerBoxLid}>
-   <Amount value={value} />
-  </View>
- </View>
-)
+const OpenLid = ({ value, animatedValue, isOpened, hasBeenOpened }) => {
+ if (!isOpened) return null
+ return (
+  <Animated.View style={[styles.boxLid, hasBeenOpened ? {} : { transform: [{ scaleY: animatedValue }] }]}>
+   <View style={styles.innerBoxLid}>
+    <Amount value={value} />
+   </View>
+  </Animated.View>
+ )
+}
 
-const Box = ({ number, isOpened = false, value }) => (
- <Fragment>
-  {isOpened && <OpenLid value={value} />}
+
+const Box = ({ number, isOpened = false, value }) => {
+ const animatedValue = new Animated.Value(0);
+ const hasBeenOpened = useRef(false);
+
+ const openLidAnimation = () => {
+  Animated.timing(animatedValue, { toValue: 1, duration: 50, useNativeDriver: true }).start()
+ }
+
+ useEffect(() => {
+  if (isOpened && !hasBeenOpened.current) {
+   console.log('run animation');
+
+   openLidAnimation()
+   hasBeenOpened.current = true
+  }
+ }, [isOpened]);
+
+ return (<Fragment>
+  <OpenLid value={value} animatedValue={animatedValue} isOpened={isOpened} hasBeenOpened={hasBeenOpened.current} />
   {!isOpened && <ClosedLid />}
   <View style={styles.container}>
    {!isOpened && <Seal />}
@@ -30,8 +49,8 @@ const Box = ({ number, isOpened = false, value }) => (
     <Text style={styles.number}>{number}</Text>
    </View>
   </View>
- </Fragment>
-)
+ </Fragment>)
+}
 
 const styles = StyleSheet.create({
  container: {
