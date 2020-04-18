@@ -19,6 +19,7 @@ const GameScreen = ({ navigation }) => {
   const [showDealActions, setShowDealActions] = useState(false);
   const [dealtAt, setDealtAt] = useState(null);
   const [showEndOfGameModel, setShowEndOfGameModel] = useState(false);
+  const [disableBoxPress, setDisableBoxPress] = useState(false);
 
   useEffect(() => {
     setBoxValues(generateBoxes())
@@ -34,13 +35,17 @@ const GameScreen = ({ navigation }) => {
 
   const openBox = boxNumber => {
     const selectedBox = boxValues.find(box => box.boxNumber === boxNumber)
-    if (selectedBox.isOpened) return null
+    if (selectedBox.isOpened || disableBoxPress) return null
     updateBoxValues(boxNumber);
     setTurnCounter(turnCounter + 1)
     const remainingValues = boxValues.filter(({ isOpened }) => !isOpened).map(({ value }) => value)
     if (bankerTurns.includes(turnCounter)) {
+      setDisableBoxPress(true)
       const offer = offerDeal(remainingValues, turnCounter)
-      setShowDealActions(true)
+      const timer = setTimeout(() => {
+        setShowDealActions(true)
+        clearTimeout(timer)
+      }, 1000)
       setCurrentOffer(offer)
     }
   };
@@ -63,6 +68,7 @@ const GameScreen = ({ navigation }) => {
   const closeModal = () => {
     setShowDealActions(false);
     setLastOffer(currentOffer);
+    setDisableBoxPress(false)
     checkForEndOfGame()
   }
 
@@ -75,7 +81,7 @@ const GameScreen = ({ navigation }) => {
       {showDealActions ?
         <DealActions isVisable={showDealActions} currentOffer={currentOffer} takeDeal={takeDeal} noDeal={noDeal} dealtAt={dealtAt} closeModal={closeModal} />
         :
-        <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} />
+        <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} disableBoxPress={disableBoxPress} />
       }
       <GameBoard boxValues={boxValues} />
     </SafeAreaView>

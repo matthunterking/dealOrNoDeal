@@ -5,7 +5,11 @@ import { deviceWidth } from '../constants/device'
 import Box from './Box';
 
 const Player = ({ boxNumber, isOpened, value, openBox, player }) => (
- <TouchableOpacity style={styles.playerContainer} onPress={() => openBox(boxNumber)}>
+ <TouchableOpacity
+  style={styles.playerContainer}
+  onPress={() => openBox(boxNumber)}
+  activeOpacity={1}
+ >
   <Image source={player} style={styles.playerImage} />
   <Box number={boxNumber} isOpened={isOpened} value={value} />
  </TouchableOpacity>
