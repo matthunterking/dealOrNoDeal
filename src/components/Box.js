@@ -14,11 +14,14 @@ const ClosedLid = () => (
 const OpenLid = ({ value, animatedValue, isOpened, hasBeenOpened }) => {
  if (!isOpened) return null
  return (
-  <Animated.View style={[styles.boxLid, hasBeenOpened ? {} : { transform: [{ scaleY: animatedValue }] }]}>
+  <Animated.View style={[styles.boxLid,
+  !hasBeenOpened ? { transform: [{ translateY: animatedValue }] } : { bottom: 60 }
+  ]}
+  >
    <View style={styles.innerBoxLid}>
     <Amount value={value} />
    </View>
-  </Animated.View>
+  </Animated.View >
  )
 }
 
@@ -28,13 +31,11 @@ const Box = ({ number, isOpened = false, value }) => {
  const hasBeenOpened = useRef(false);
 
  const openLidAnimation = () => {
-  Animated.timing(animatedValue, { toValue: 1, duration: 50, useNativeDriver: true }).start()
+  Animated.timing(animatedValue, { toValue: -40, duration: 50, useNativeDriver: true }).start()
  }
 
  useEffect(() => {
   if (isOpened && !hasBeenOpened.current) {
-   console.log('run animation');
-
    openLidAnimation()
    hasBeenOpened.current = true
   }
@@ -74,7 +75,9 @@ const styles = StyleSheet.create({
   backgroundColor: BOX_RED,
   width: 100,
   height: 55,
-  padding: 5
+  padding: 5,
+  position: 'absolute',
+  bottom: 20
  },
  innerBoxLid: {
   backgroundColor: 'white',
