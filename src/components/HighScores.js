@@ -13,7 +13,7 @@ const Score = ({ date, score }) => (
  </View>
 )
 
-const HighScores = ({ navigation }) => {
+const HighScores = () => {
  const [highScores, setHighScores] = useState(null);
 
  const getScores = async () => {
@@ -23,9 +23,6 @@ const HighScores = ({ navigation }) => {
 
  useEffect(() => {
   getScores();
-  return navigation.addListener('didFocus', () => {
-   getScores();
-  });
  }, []);
 
  if (!highScores) return null;

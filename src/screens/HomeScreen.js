@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => (
       onPress={() => navigation.navigate('ChooseYourBoxScreen')}
       content='NEW GAME'
     />
-    <HighScores navigation={navigation} />
+    <HighScores />
   </View>
 );
 
