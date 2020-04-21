@@ -30,15 +30,6 @@ export const offerDeal = (remainingValues, turnCounter) => {
 
  const lowestAmountLeft = sortedRemainingValues[0];
  const heighestAmountLeft = sortedRemainingValues[sortedRemainingValues.length - 1];
- console.log('sortedRemainingValues', sortedRemainingValues);
- console.log('lowestAmountLeft', lowestAmountLeft);
- console.log('heighestAmountLeft', heighestAmountLeft);
-
- console.log('averageOfRemainingBoxes -> ', averageOfRemainingBoxes);
- console.log('dealNumber -> ', dealNumber);
- console.log('gameDeduction -> ', gameDeduction);
- console.log('randomFactor -> ', randomFactor);
- console.log('newOffer -> ', Math.round(newOffer));
 
  if (newOffer < 1) {
   if (heighestAmountLeft === 0.5) return 0.2
