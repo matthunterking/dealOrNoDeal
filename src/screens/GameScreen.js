@@ -83,7 +83,7 @@ const GameScreen = ({ navigation }) => {
         :
         <BoxSelectionCarousel openBox={openBox} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} disableBoxPress={disableBoxPress} />
       }
-      <GameBoard boxValues={boxValues} />
+      <GameBoard boxValues={boxValues} compressValues={turnCounter > 17} />
     </SafeAreaView>
   );
 };

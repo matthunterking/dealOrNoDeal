@@ -107,7 +107,7 @@ const EndOfGameModal = ({ isVisable, dealtAt, boxValues, chosenBoxNumber, naviga
         <Text style={styles.text}>You won</Text>
         <Text style={styles.finalResult}>{formatToCurrency(finalScore)}</Text>
         <Text style={styles.text}>
-          {finalScore > lastOffer ? 'You beat the banker!' : `But you could have won ${lastOffer}`}
+          {finalScore > lastOffer ? 'You beat the banker!' : `But you could have won ${formatToCurrency(lastOffer)}`}
         </Text>
         <Button onPress={() => navigation.navigate('HomeScreen')} content='Return to homescreen' />
       </Fragment>

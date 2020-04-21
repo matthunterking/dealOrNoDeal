@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, Animated } from 'react
 import { formatToCurrency } from '../util/currency';
 import Button from './Button';
 import { deviceWidth } from '../constants/device';
+import { CAROUSEL_BACKGROUND } from '../constants/theme';
 
 const phoneImage = require('../assets/phone.png');
 
@@ -69,7 +70,8 @@ const styles = StyleSheet.create({
   width: deviceWidth,
   flexDirection: 'row',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  backgroundColor: CAROUSEL_BACKGROUND
  },
  answerPhoneButton: {
   flex: 1,
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   alignItems: 'center'
  },
  container: {
-  backgroundColor: 'white',
+  backgroundColor: CAROUSEL_BACKGROUND,
   borderRadius: 10,
   borderWidth: 3,
   height: 500,
