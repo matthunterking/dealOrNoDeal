@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Box from './Box';
 import { bankerTurns } from '../constants/game';
 import { formatToCurrency } from '../util/currency';
-import { DEAL_NO_DEAL_BUTTON } from '../constants/theme';
+import { isLargeDevice } from '../constants/device';
 
 const GameStatus = ({ text, valueToDisplay }) => (
  <View>
@@ -35,6 +35,8 @@ const GameHeader = ({ chosenBox, turnCounter, lastOffer, dealtAt }) => {
 const styles = StyleSheet.create({
  container: {
   flexDirection: 'row',
+  backgroundColor: 'white',
+  paddingVertical: isLargeDevice ? 20 : 0
  },
  yourBoxContainer: {
   flex: 1,

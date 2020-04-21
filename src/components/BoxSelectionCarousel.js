@@ -4,6 +4,7 @@ import Carousel from 'react-native-snap-carousel';
 import { deviceWidth } from '../constants/device'
 import Box from './Box';
 import { isLargeDevice } from '../constants/device';
+import { CAROUSEL_BACKGROUND } from '../constants/theme';
 
 const Player = ({ boxNumber, isOpened, value, openBox, player }) => (
  <TouchableOpacity
@@ -40,8 +41,7 @@ const styles = StyleSheet.create({
   flexDirection: 'row',
   height: isLargeDevice ? 205 : 200,
   paddingBottom: isLargeDevice ? 5 : 0,
-  marginTop: isLargeDevice ? 5 : 0,
-  backgroundColor: 'rgb(53, 0, 228)'
+  backgroundColor: CAROUSEL_BACKGROUND
  },
  yourBoxContainer: {
   flex: 1,
