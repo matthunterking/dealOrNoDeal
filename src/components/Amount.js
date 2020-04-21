@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { Text, StyleSheet, Animated } from 'react-native';
 import { formatToCurrency } from '../util/currency';
 import { AMOUNT_RED, AMOUNT_BLUE } from '../constants/theme';
+import { isLargeDevice } from '../constants/device';
 
 const Amount = ({ value, isOpened = false, isLarge = false }) => {
  const animatedValue = new Animated.Value(0);
@@ -36,10 +37,12 @@ const Amount = ({ value, isOpened = false, isLarge = false }) => {
 
 const styles = StyleSheet.create({
  container: {
-  padding: 5,
+  padding: isLargeDevice ? 5 : 3,
   borderRadius: 10,
   borderWidth: 0.5,
-  minWidth: 70
+  minWidth: 70,
+  borderColor: 'silver',
+  borderWidth: 1
  },
  text: {
   color: 'white',
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
   textAlign: 'center'
  },
  largeText: {
-  fontSize: 16
+  fontSize: isLargeDevice ? 20 : 16
  },
  amount: {
   flex: 1,

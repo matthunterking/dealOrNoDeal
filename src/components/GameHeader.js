@@ -34,7 +34,7 @@ const GameHeader = ({ chosenBox, turnCounter, lastOffer, dealtAt }) => {
 
 const styles = StyleSheet.create({
  container: {
-  flexDirection: 'row'
+  flexDirection: 'row',
  },
  yourBoxContainer: {
   flex: 1,

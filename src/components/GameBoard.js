@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { deviceWidth } from '../constants/device';
 import { values } from '../constants/game';
 import Amount from './Amount';
@@ -32,9 +32,10 @@ const styles = StyleSheet.create({
   flex: 1,
   width: deviceWidth,
   flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'silver'
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  backgroundColor: 'black',
+  paddingVertical: 10
  },
  list: {
   flex: 1

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { generateBoxes } from '../util/gameSetUp';
 import { offerDeal } from '../util/banker';
 import { bankerTurns } from '../constants/game';
@@ -75,7 +75,7 @@ const GameScreen = ({ navigation }) => {
   if (!boxValues) return null
 
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
+    <SafeAreaView style={styles.container} >
       <EndOfGameModal isVisable={showEndOfGameModel} dealtAt={dealtAt} boxValues={boxValues} chosenBoxNumber={chosenBoxNumber} lastOffer={lastOffer} navigation={navigation} />
       <GameHeader chosenBox={chosenBoxNumber} turnCounter={turnCounter} lastOffer={lastOffer} dealtAt={dealtAt} />
       {showDealActions ?
@@ -87,5 +87,14 @@ const GameScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white'
+  }
+})
 
 export default GameScreen;
