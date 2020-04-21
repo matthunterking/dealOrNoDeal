@@ -27,16 +27,26 @@ export const playerImages = [
  require('../assets/people/Person26.png')
 ]
 
-export const playerSayings = {
- // This is the 10p, I can feel it.
- // Good Luck
- // I hope it's low
- // I've got a bad feeling about this one
- // I really want you to do well
- // I think this is a big one
- // We all rooting for you
- // You are only here once
- // I think this is red
- // I'm sure this one is a blue
- // 
-}
+export const playerPhrases = [
+ 'I think this is a high one',
+ 'I think this is a low one',
+ 'This one is red, I can feel it',
+ 'This one is blue, I can feel it',
+ 'I had the £250,000 last time',
+ 'I had the 1p last time',
+ 'This is the 10p, I can feel it.',
+ 'Good Luck',
+ 'Good Luck',
+ 'I hope this is low',
+ "I've got a bad feeling",
+ 'I really want you to do well',
+ 'I think this is a big one',
+ 'We are all rooting for you',
+ 'You are only here once',
+ "I'm sure this one is a blue",
+ "You just need to believe",
+ "You can do it",
+ "Best of luck",
+ "Hope this is low",
+ "All the best"
+]

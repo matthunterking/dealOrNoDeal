@@ -30,13 +30,9 @@ const replaceHighScore = (highScores, newScoreData, scoreToReplace) => {
 }
 
 export const getHighScores = async (callback = null) => {
- console.log('getting scores');
-
  try {
   const data = await AsyncStorage.getItem('highScores');
   const parsedData = JSON.parse(data);
-  console.log('got this back! ', parsedData);
-
   return callback ? callback(parsedData) : parsedData;
  } catch (e) {
   console.log('error ', e);
