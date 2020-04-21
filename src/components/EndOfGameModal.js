@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   boxContainer: {
     width: 200,
     height: 200,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center'
   },
   text: {
