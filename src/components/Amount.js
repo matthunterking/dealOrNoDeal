@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Text, StyleSheet, Animated } from 'react-native';
 import { formatToCurrency } from '../util/currency';
 import { AMOUNT_RED, AMOUNT_BLUE } from '../constants/theme';

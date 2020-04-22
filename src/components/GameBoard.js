@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { deviceWidth } from '../constants/device';
 import { values } from '../constants/game';

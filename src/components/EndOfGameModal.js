@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, StyleSheet } from 'react-native';
 import { formatToCurrency } from '../util/currency';
 import Box from './Box';
 import Button from './Button';

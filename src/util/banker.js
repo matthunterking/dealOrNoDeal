@@ -1,23 +1,5 @@
 import { bankerTurns } from '../constants/game';
 
-//[5, 8, 11, 14, 17, 20]
-
-// 1 lower then increase
-
-// 6 offers 6 = 1 
-
-/// 6
-// 1 - 20% av £7k max £24 / 33274 
-// 2 - 30% av 11k
-// 3 - 60% av 13k
-// 4 - 60% av 13k
-// 5 - 85% av 16k
-// 6 - 100% middle
-
-// 3899 => 3900
-// 345 => 350
-// 34 => 35
-
 const deductionPercentages = [0.4, 0.55, 0.6, 0.6, 0.85, 1];
 
 export const offerDeal = (remainingValues, turnCounter) => {
@@ -28,7 +10,6 @@ export const offerDeal = (remainingValues, turnCounter) => {
  const randomFactor = (Math.floor(Math.random() * (11 - 9)) + 9) / 10;
  const newOffer = Math.round((averageOfRemainingBoxes * gameDeduction) * randomFactor);
 
- const lowestAmountLeft = sortedRemainingValues[0];
  const heighestAmountLeft = sortedRemainingValues[sortedRemainingValues.length - 1];
 
  if (newOffer < 1) {

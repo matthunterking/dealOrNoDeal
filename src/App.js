@@ -1,6 +1,5 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from './screens/HomeScreen';
 import ChooseYourBoxScreen from './screens/ChooseYourBoxScreen';
 import GameScreen from './screens/GameScreen';

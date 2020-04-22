@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import Box from '../components/Box';
-import { deviceWidth } from '../constants/device'
 
 const ChooseYourBoxScreen = ({ navigation }) => {
   const numbers = new Array(22).fill('').map((n, index) => index + 1);
